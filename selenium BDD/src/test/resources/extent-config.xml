@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <status>
+        <option flag="pass" theme="badge"/>
+        <option flag="fail" theme="badge"/>
+        <option flag="skip" theme="badge"/>
+    </status>
+    <encoding>UTF-8</encoding>
+    <theme>standard</theme>
+</configuration>

@@ -1,0 +1,22 @@
+{
+  "name": "playwright-ui-framework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interview-prep Playwright test automation framework",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke --project=chromium",
+    "test:regression": "playwright test --grep @regression",
+    "test:chromium": "playwright test --project=chromium",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1"
+  }
+}

@@ -1,0 +1,48 @@
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+!**/maven-wrapper.jar
+build/
+out/
+
+# --- IDE ---
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+*.swp
+*.swo
+
+# --- Test artifacts ---
+playwright-report/
+test-results/
+blob-report/
+test-output/
+allure-results/
+allure-report/
+surefire-reports/
+*.hprof
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+*.local
+
+# --- Logs ---
+*.log
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini

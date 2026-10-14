@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Alice Framework",
+    "username": "alice.fw",
+    "email": "alice.framework@example.com"
+  },
+  {
+    "name": "Bob Automation",
+    "username": "bob.auto",
+    "email": "bob.automation@example.com"
+  }
+]
