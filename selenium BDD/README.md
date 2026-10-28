@@ -25,7 +25,18 @@ mvn clean test -Dbrowser=chrome -Dheadless=true
 
 See package layout under `src/test/java/com/framework/` — features in `src/test/resources/features/`.
 
-## GitHub Actions (nightly + email)
+## GitHub Actions
+
+Two workflows live in [`.github/workflows/`](.github/workflows/):
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| [`ci.yml`](.github/workflows/ci.yml) | push to `main`, pull requests, manual | Fast feedback: runs the suite headless and uploads reports as artifacts |
+| [`nightly-bdd.yml`](.github/workflows/nightly-bdd.yml) | nightly `06:00 UTC`, manual | Full nightly run that also emails a ZIP of the reports |
+
+`ci.yml` runs headless Chrome on JDK 17 and uploads the Cucumber, Extent, and failure-screenshot artifacts (14-day retention).
+
+### Nightly workflow (nightly + email)
 
 Workflow: [`.github/workflows/nightly-bdd.yml`](.github/workflows/nightly-bdd.yml)
 
