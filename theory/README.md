@@ -77,6 +77,11 @@ QE / SDET interview prep: **Selenium · Java · TestNG · RestAssured · Cucumbe
 |---|---|
 | `database/sql-mini-round.md` | JOINs, HAVING, duplicates, nth highest, ACID |
 
+### AI / LLM
+| File | Topic |
+|---|---|
+| `../ai-testing-prep/README.md` | LLM, RAG, chatbot testing, safety, TD banking lens |
+
 ---
 
 ## 🎯 Delivery tips (the thing that actually loses marks)
