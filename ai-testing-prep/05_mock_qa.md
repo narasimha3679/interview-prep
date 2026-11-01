@@ -51,14 +51,7 @@ Sections:
 > behaviour. The automation skills overlap, but the oracle changes: for AI I test properties and
 > distributions, not exact outputs."
 
-**A5. How do you use AI in testing today?**
-
-> "Where it speeds up the boring parts: drafting test cases, generating test data, explaining a
-> failure, reviewing a diff, boilerplate. I review everything and never paste customer data, secrets
-> or internal documents. The trap is accepting generated tests that assert nothing or call APIs
-> that don't exist."
-
-**A6. How do you use AI in testing without creating false confidence?**
+**A5. How do you use AI in testing, and how do you avoid false confidence?**
 
 > "I use it for breadth and speed, not for the oracle. It's good at drafting cases, generating
 > synthetic data, summarising failures, suggesting locators and boilerplate. Every output is
@@ -74,7 +67,7 @@ Sections:
 | Failure triage | Clustering, summaries | Plausible but wrong root cause |
 | Code/test review | Finding gaps | False confidence; hallucinated APIs |
 
-**A7. What would you do in your first 90 days?**
+**A6. What would you do in your first 90 days?**
 
 > "First 30 days: map the AI use cases, users, risk tiers and source-of-truth documents, and get
 > access to traces. Build a 50–100 case golden set with expected answers and expected sources, plus
@@ -518,6 +511,8 @@ Sections:
 > legal, privacy and model risk to turn each obligation into a testable control. The controls are
 > things like consent, data minimization, retention, explainability and human oversight."
 
+> **Check before you say it:** Quebec's Law 25 also applies to French-speaking Quebec clients, as a separate obligation from PIPEDA. Don't cite AIDA (Bill C-27) as current law: it died when Parliament was prorogued in January 2025.
+
 **G6. How would you test TD's virtual assistant?**
 
 > "I'd start with the risk tier and the users. For a colleague-facing RAG assistant, the core is
@@ -526,8 +521,8 @@ Sections:
 > and PII. For the client-facing TDI bot, I'd add unauthenticated privacy, disclaimers, advice
 > boundaries and accessibility. Then I'd gate on thresholds and monitor thumbs and sampled traces."
 >
-> Use the public examples carefully: "I read that TD's assistants use retrieval grounding and
-> citations" — not "I know your architecture."
+> Use the public examples carefully: "I read that TD's colleague assistants use retrieval grounding
+> and human oversight" — not "I know your architecture."
 
 **G7. How would you test an agentic AI workflow?**
 

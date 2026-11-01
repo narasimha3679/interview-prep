@@ -33,7 +33,7 @@ can prove an AI feature is safe under regulation.
 12. **CI:** fast smoke + retrieval checks per PR; full eval nightly; red team + human review before release; block on thresholds and zero P0 safety failures.
 13. **Production:** sample traffic, thumbs/feedback, drift, tracing, canary, rollback/kill switch.
 14. **Banking lens:** citations + source version + audit log + human-in-the-loop + EN/FR parity + no personalised advice without disclaimer.
-15. **TD public context:** Layer 6, Trustworthy AI, RAG assistants with citations, client-facing TDI chatbot, agentic AI with underwriter review.
+15. **TD public context:** Layer 6 (AI R&D), the Trustworthy AI team, retrieval-grounded assistants with human oversight, client-facing TDI chatbot, agentic AI with underwriter review.
 
 ---
 
@@ -45,7 +45,7 @@ you rambling.
 | # | Question | What to say |
 |---|---|---|
 | 1 | **What is the risk?** | Wrong money/eligibility/coverage? PII leak? Bad advice? Bad UX? Rank P0/P1/P2. |
-| 2 | **Which layer?** | Data/ingestion, retrieval, prompt/generation, conversation, safety, non-functional, operations. |
+| 2 | **Which layer?** | Data (L0), retrieval (L1), prompt and generation (L2–L3), conversation (L4), safety (L5), non-functional (L6), production (L7). |
 | 3 | **What is the oracle?** | Exact, expected source, semantic similarity, rubric/LLM-judge, human review. |
 | 4 | **What is the gate?** | Threshold, number of runs, CI stage, production monitoring, rollback. |
 
@@ -125,7 +125,7 @@ false claim.
   RAGAS in CI" beats "I'd check the answers".
 - **Say the trap:** "…but if I only score the final answer, I can't tell whether retrieval or
   generation failed."
-- **Give a TD example:** the RAG assistant with citations, the EN/FR requirement, the
+- **Give a TD example:** the retrieval-grounded policy assistant, the EN/FR requirement, the
   underwriter reviewing an agent-generated memo.
 - **Be precise about what you don't know:** "I haven't built a vector index at scale; I understand
   the retrieval trade-offs and I'd test them."
@@ -137,8 +137,8 @@ false claim.
 
 - Say the **15-line cram sheet** out loud once.
 - Say the **4-question method**: risk → layer → oracle → gate.
-- Say the **7 layers**: data, retrieval, prompt/generation, conversation, safety, non-functional, operations.
-- Pick **3 TD talking points**: citations, human-in-the-loop, EN/FR.
+- Say the **8 layers (L0–L7)**: data, retrieval, prompt, generation, conversation, safety, non-functional, production.
+- Pick **3 TD talking points**: grounding, human-in-the-loop, EN/FR.
 - Pick **5 questions** from `06` to ask them.
 - Have **one project story** and **one AI failure story** ready.
 - If you don't know: *"I haven't worked with that directly. My instinct would be X because of Y —

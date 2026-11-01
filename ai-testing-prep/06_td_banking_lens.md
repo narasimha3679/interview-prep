@@ -15,7 +15,7 @@ The goal is to show three things:
 TD is not experimenting with a toy chatbot. It has publicly described:
 
 - **RAG-based virtual assistants** for contact-centre and branch colleagues, grounded in TD policy
-  with **citations** so staff can verify answers.
+  with **retrieval grounding** and **human oversight**, the controls TD has described for colleague-facing assistants.
 - A **client-facing, unauthenticated generative AI chatbot** for TD Insurance, in **English and
   French**, with thumbs-up/down feedback.
 - An **agentic AI** workflow for real-estate secured lending that prepares a summary memo for a
@@ -33,7 +33,7 @@ Adapt this to your real experience; do not claim work you haven't done.
 > "I'm a QE/SDET with a strong automation background. What I've been building is the evidence layer
 > for AI systems: a versioned golden set, retrieval checks, grounding and citation metrics, safety
 > tests for prompt injection and PII, and CI gates. I read that TD's assistants use retrieval
-> grounding and citations, with human oversight for colleague and underwriter workflows — that's
+> grounding and human oversight for colleague and underwriter workflows — that's
 > exactly the kind of system I want to test. I won't build the model. I'll make sure we can prove
 > it's accurate, grounded, fair, private and reliable enough to ship, and that we can detect it
 > when it drifts."
@@ -45,12 +45,12 @@ Adapt this to your real experience; do not claim work you haven't done.
 | Initiative | What it is (public) | Testing implication |
 |---|---|---|
 | **Responsible AI Principles** (Jul 2026) | Seven enterprise commitments across fairness, transparency/explainability, privacy/data use, quality/accountability, reliability, security and applicable law | Each principle needs a testable control and evidence, not a policy PDF |
-| **Trustworthy AI team / Layer 6** | TD's AI research arm and the team that evaluates models; independent model validators; model-risk and privacy assessments | Expect evidence, documentation, traceability and independent review |
-| **Contact-centre GenAI assistant** | RAG over TD policies and procedures; answers with citations; used by 1,000+ reps; reduced hold times | Retrieval quality, faithfulness, citation accuracy, human verification |
-| **Branch Banking Virtual Assistant** | GenAI assistant for 19,000+ branch colleagues; high adoption; fewer outgoing support calls | Colleague-facing risk: correct policy, citations, escalation, EN/FR |
-| **TD Insurance Virtual Assistant** (May 2026) | First client-facing, unauthenticated GenAI chatbot among the Big Five; home/auto/small business insurance; EN/FR; no login/PII; thumbs feedback | Privacy, disclaimers, advice boundary, accessibility, safe refusal, FR parity |
+| **Layer 6 and the Trustworthy AI team** | Layer 6 is TD's AI R&D centre. The Trustworthy AI team is a separate group that evaluates models before deployment and monitors them after; AI Risk Management oversees; model-risk and privacy impact assessments apply | Expect evidence, documentation, traceability and independent review |
+| **Contact-centre GenAI assistant** | Gen AI assistant that helps colleagues answer customer questions in seconds; reduced call hold times by 12% (TD, 1 May 2026) | Retrieval quality, faithfulness, citation accuracy, human verification |
+| **Branch Banking Virtual Assistant** | GenAI assistant for 19,000+ branch colleagues; 94% adoption; outgoing support calls down 89% (TD Stories, Jul 2026) | Colleague-facing risk: correct policy, grounding, escalation, EN/FR |
+| **TD Insurance Virtual Assistant** (May 2026) | First home and auto insurer, and first among the Big Five, to offer an unauthenticated client-facing GenAI chatbot; answers from TD Insurance website content; home/auto/small business insurance; EN/FR; no login/PII; thumbs feedback | Privacy, disclaimers, advice boundary, accessibility, safe refusal, FR parity |
 | **TD AI Prism** | A predictive foundation model using financial behaviour to predict future needs | Different test lens: fairness, explainability, drift, model risk — not just RAG |
-| **Agentic AI for RESL** (May 2026) | Classifies documents, extracts income, validates policy, checks consent, finds discrepancies, writes a memo for underwriters; 15 hours → under 3 minutes | Tool use, calculations, permissions, consent, human approval, audit trail |
+| **Agentic AI for RESL** (May 2026) | For mortgages and HELOCs: classifies documents, extracts income, validates figures against policy, checks consent, finds discrepancies, writes a memo for underwriters; about 15 hours → under 3 minutes on average | Tool use, calculations, permissions, consent, human approval, audit trail |
 | **TD Securities / TD Wealth assistants** | Internal assistants for research and product/policy information | Role-based access, citations, confidentiality, high-risk advice boundary |
 
 **The nuance that makes you sound credible:**
@@ -81,12 +81,13 @@ Adapt this to your real experience; do not claim work you haven't done.
 
 Given TD's public context, these themes will land:
 
-1. **Grounding and citations.** A RAG answer without a verifiable source is not acceptable for
+1. **Grounding and verifiability.** TD names retrieval grounding and human oversight as its controls for colleague assistants. A RAG answer without a verifiable source is not acceptable for
    policy guidance.
 2. **Human-in-the-loop.** Colleague assistants are designed for verification; agentic workflows
    produce a memo for an underwriter. Test the review/override path, not just the output.
-3. **EN/FR parity.** TD has publicly emphasized equally complete and accurate answers in English
-   and French. That is a test dimension, not a translation afterthought.
+3. **EN/FR parity.** The TDI assistant is offered in English and French. Treat parity as a test
+   requirement (equally complete and accurate answers), not a translation afterthought. This
+   requirement is ours, not a TD quote.
 4. **Risk tiering.** A client-facing unauthenticated insurance bot and an internal policy assistant
    do not get the same thresholds.
 5. **Auditability.** Model version, prompt version, retrieved sources, answer and reviewer action
@@ -104,7 +105,7 @@ Given TD's public context, these themes will land:
 
 ## 4. TD's Responsible AI principles mapped to tests
 
-This table is the bridge between "responsible AI" (which can sound abstract) and your job.
+This table is the bridge between "responsible AI" (which can sound abstract) and your job. The principle names are TD's wording. The "what it means in practice" and "test evidence" columns are our interpretation, not TD's text.
 
 | Principle | What it means in practice | Test evidence |
 |---|---|---|
@@ -250,7 +251,7 @@ Pick 5–8. These are tailored to their public context.
 
 ## 9. Sources (public)
 
-Use these to verify before quoting. Dates are publication dates.
+Use these to verify before quoting. Dates are publication dates. Checked on 1 Nov 2026: the Responsible AI, TDI, RESL and Branch Banking pages. The Trustworthy AI and Fintech.ca pages were not checked.
 
 - **TD strengthens Its Responsible AI Principles** — TD Media Room, 30 Jul 2026:
   <https://td.mediaroom.com/2026-07-30-TD-strengthens-Its-Responsible-AI-Principles-to-support-trust-in-AI-innovation>
@@ -271,6 +272,6 @@ Use these to verify before quoting. Dates are publication dates.
 
 ## 10. The 10-second version
 
-> **TD is deploying RAG assistants with citations, a client-facing EN/FR chatbot and agentic
+> **TD is deploying retrieval-grounded assistants with human oversight, a client-facing EN/FR chatbot and agentic
 > workflows with human review. My job is to prove retrieval, grounding, citations, privacy,
 > fairness, safety and operations — and to make that evidence a release gate.**
