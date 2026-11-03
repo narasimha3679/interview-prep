@@ -13,7 +13,7 @@ can decide what to test.
 
 > "An LLM is a next-token predictor trained on a large body of text. It generates fluent output
 > from patterns, not from a database of verified facts. RAG turns it into an open-book exam: the
-> app retrieves relevant passages from a controlled knowledge base, puts them in the prompt, and
+> app retrieves relevant passages from a controlled knowledge source, puts them in the prompt, and
 > asks the model to answer from them and cite them. That gives us freshness, access control and an
 > audit trail — but it adds a new failure surface, retrieval. So I test the data, retrieval,
 > generation and conversation separately, then the whole thing end to end."
@@ -59,7 +59,7 @@ That one fact explains most of the behaviour you have to test:
 
 ---
 
-## 2. Embeddings and vector search
+## 2. Embeddings, vectors and retrieval sources
 
 An **embedding** is a list of numbers (a vector) that represents the meaning of a piece of text.
 Texts with similar meaning end up close together in that vector space. A **vector database** stores
@@ -89,6 +89,36 @@ match.
 vectors from two different spaces. Retrieval quality collapses in a way that looks like a model
 problem.
 
+### Vector DB is one retriever, not the only one
+
+The examples below use vector search as the default because it is the most common choice for policy
+documents. But RAG is **retriever-agnostic**: any source that can return relevant evidence can be
+used.
+
+| Retriever | How it finds evidence | Best for | Test focus |
+|---|---|---|---|
+| **Vector / semantic search** | Embeds the query, finds nearest chunks | Paraphrase, synonyms, natural questions | Semantic relevance, multilingual, domain terms |
+| **Keyword / lexical (BM25, Elasticsearch)** | Matches terms and ranks them | Exact codes, product names, acronyms | Exact-match queries, recall on names/codes |
+| **Hybrid** | Combines vector + keyword scores | Most production document search | Weighting, trade-off between exact and semantic |
+| **SQL / API** | Queries structured systems | Account data, rates, order status | Correct parameters, permissions, freshness |
+| **Knowledge graph** | Traverses entities and relationships | Eligibility, product hierarchies | Relationship correctness, access control |
+| **Web / enterprise search** | Queries an external index | Fresh or broad content | Source quality, recency, injection risk |
+
+**The interview line:**
+> "RAG needs a retriever, not a specific database. Vector search is the common default for
+> unstructured policy text, but production systems often use hybrid search, and some retrieve from
+> SQL, APIs or a knowledge graph."
+
+**Nuance:** some teams reserve "RAG" for document retrieval and call SQL/API retrieval "tool
+calling." The boundary is blurry — both retrieve evidence and put it in the model's context. In an
+interview, say "RAG is the retrieve-then-generate pattern; the retriever can be a search index, a
+database, an API or a graph."
+
+**Banking example:**
+- "What does the lost-card policy say?" → vector or hybrid search over policy documents.
+- "What is my account balance?" → API/SQL, not a vector DB.
+- "Which card products am I eligible for?" → rules/API plus policy retrieval, possibly a graph.
+
 ---
 
 ## 3. RAG step by step
@@ -96,21 +126,19 @@ problem.
 RAG has two pipelines: **ingestion** (offline) and **query** (online).
 
 ```
-INGESTION (offline)                                     QUERY (online)
+INGESTION (offline)
+  documents → parse → clean → chunk → embed → index / store
+    (PDF, HTML, policy, FAQ)                  │
+                                              └─ vector DB · keyword index ·
+                                                 hybrid · SQL/API · graph
 
- documents ──► parse ──► clean ──► chunk ──► embed ──► vector DB
-   (PDF, HTML, policy, FAQ)                              ▲
-                                                         │ similarity search
- user question ──► embed ──► retrieve top-k ──► rerank ──┘
-                                                         │
-                                                         ▼
-                          prompt = system rules + question + retrieved chunks
-                                                         │
-                                                         ▼
-                                                   LLM generates
-                                                         │
-                                                         ▼
-                                      answer + citations + guardrails + log
+QUERY (online)
+  question → build query → retriever → rerank → prompt + retrieved evidence
+             (embed / keywords)     │
+                                    └─ top-k evidence
+                                              │
+                                              ▼
+                                       LLM → answer + citations
 ```
 
 ### Ingestion side
@@ -121,13 +149,15 @@ INGESTION (offline)                                     QUERY (online)
 3. **Clean**: remove duplicates, navigation text, expired versions.
 4. **Chunk** into passages (common starting point: a few hundred tokens with 10–20% overlap).
 5. **Enrich metadata**: source ID, title, section, effective date, locale, audience, classification.
-6. **Embed** each chunk.
-7. **Index** it in the vector database.
+6. **Embed** each chunk where the retriever needs vectors.
+7. **Index/store** the chunks in the appropriate retriever: vector DB, keyword index, hybrid index,
+   or a structured source.
 
 ### Query side
 
-1. Embed the user's question.
-2. Retrieve the top-k nearest chunks, applying metadata filters (role, locale, date).
+1. Build the query for the retriever: embed the question, extract keywords, or construct the
+   API/SQL call.
+2. Retrieve the top-k evidence (or matching record), applying metadata filters (role, locale, date).
 3. Optionally **rerank** the candidates with a more precise model.
 4. Build the prompt: system rules + question + retrieved chunks + citation instructions.
 5. Generate the answer.
@@ -279,12 +309,14 @@ These make you sound clear, not academic.
 
 **What is a vector database?**
 > A store that indexes embeddings and returns the nearest chunks by semantic similarity. It also
-> holds metadata for filtering by locale, audience and permissions.
+> holds metadata for filtering by locale, audience and permissions. It's one retriever, not the
+> definition of RAG — keyword, hybrid, SQL/API and graph retrieval are also valid.
 
 **RAG vs semantic search?**
 > Semantic search just returns the most similar passages. RAG takes those passages, puts them in a
 > prompt and asks the model to generate a grounded answer with citations. RAG = retrieval +
-> generation + prompting.
+> generation + prompting. The retriever can be vector, keyword, hybrid, SQL/API or a graph —
+> semantic search is one implementation.
 
 **What is hybrid search?**
 > Combining keyword/BM25 search with vector search. It helps with exact terms like product codes,
