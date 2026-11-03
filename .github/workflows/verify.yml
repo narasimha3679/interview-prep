@@ -1,0 +1,73 @@
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  maven:
+    name: Maven (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - 'projects/karate'
+          - 'projects/restassured-bdd'
+          - 'projects/selenium-bdd'
+          - 'topics/spring-boot/examples/mini-service'
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Compile and package without running tests
+        run: mvn -B -q -DskipTests package
+
+  playwright:
+    name: Playwright typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: 'projects/playwright'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 'projects/playwright/package-lock.json'
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+  links:
+    name: Markdown links
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check relative links
+        run: python .github/scripts/check_links.py

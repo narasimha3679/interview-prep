@@ -39,6 +39,11 @@ surefire-reports/
 !.env.example
 *.local
 
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+
 # --- Logs ---
 *.log
 
