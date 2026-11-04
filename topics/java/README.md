@@ -22,7 +22,7 @@ JVM behavior, modern features, and patterns.
 |---|---|
 | [`oop-pillars-abstract-vs-interface.md`](oop-pillars-abstract-vs-interface.md) | 4 pillars, abstract vs interface |
 | [`equals-and-string-immutability.md`](equals-and-string-immutability.md) | `==` vs `equals`, String pool |
-| [`collections.md`](collections.md) | List/Set/Map, HashMap internals |
+| [`../collections/`](../collections/) | List/Set/Map, HashMap internals (full pack) |
 | [`exceptions.md`](exceptions.md) | checked/unchecked, try-with-resources |
 | [`lambdas-and-streams.md`](lambdas-and-streams.md) | lambdas, Stream API |
 | [`reading-test-data.md`](reading-test-data.md) | properties, JSON, Excel |

@@ -19,7 +19,6 @@ Lifecycle, parallel execution, assertions, listeners, and retries.
 
 | File | Topic |
 |---|---|
-| [`annotations-and-lifecycle.md`](annotations-and-lifecycle.md) | annotations, order |
 | [`annotations-and-order.md`](annotations-and-order.md) | execution order |
 | [`assertions.md`](assertions.md) | hard vs soft assert |
 | [`retry-and-listeners.md`](retry-and-listeners.md) | retry, ITestResult |

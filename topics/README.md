@@ -66,7 +66,7 @@ For level, time, and prerequisites, see [`../CATALOG.md`](../CATALOG.md).
 | Topic | What it covers |
 |---|---|
 | [`spring-boot/`](spring-boot/) | Spring core, REST design, JPA, testing, runnable mini-service |
-| [`microservices/`](microservices/) | Contracts, async, resilience, observability, platform thinking |
+| [`microservices/`](microservices/) | Testing theory overview: contracts, async, resilience, reframing your projects |
 | [`observability/`](observability/) | Logs, metrics, traces, OpenTelemetry, failure diagnosis |
 
 ## Delivery and cloud

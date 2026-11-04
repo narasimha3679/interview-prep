@@ -80,12 +80,13 @@ curl -X POST http://localhost:8080/api/listings \
 
 | File | What it gives you |
 |---|---|
-| `01_spring_core.md` | IoC, DI, stereotypes, auto-config, profiles, config |
 | `02_rest_api_design.md` | Resources, status codes, idempotency, pagination, errors |
 | `03_persistence.md` | JPA, transactions, DTOs, N+1, migrations, test data |
 | `04_testing.md` | Unit, slice, integration, Testcontainers, WireMock |
-| `05_qa.md` | Questions with model answers |
 | `examples/mini-service/` | Runnable service + tests |
+
+Moved to [`../../archive/topics/spring-boot/`](../../archive/topics/spring-boot/): `01_spring_core.md`
+and `05_qa.md`. They are dev-side material, not needed for an SDET role.
 
 ---
 
@@ -126,7 +127,6 @@ curl -X POST http://localhost:8080/api/listings \
 ## How to study this pack
 
 - **10 minutes:** README + cram sheet.
-- **30 minutes:** `01` and `02`, draw the request flow.
+- **30 minutes:** `02`, draw the request flow.
 - **30 minutes:** `03`, explain entity vs DTO and transaction boundaries.
 - **30 minutes:** `04`, run the mini-service tests and add one negative case.
-- **30 minutes:** `05`, answer out loud.

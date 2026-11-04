@@ -4,16 +4,16 @@ How to test microservices: the architecture vocabulary, the test portfolio, cont
 behavior, resilience, and the platform/framework-team specialization.
 
 This pack is useful for any SDET working with services. The **framework/platform-team** material
-(`02_framework_as_a_product.md`, `03_reframe_your_projects.md`, and the positioning answers in
-`04_mock_qa.md`) is one specialization, not a requirement for every role.
+(`03_reframe_your_projects.md` and the positioning answers in `04_mock_qa.md`) is one specialization,
+not a requirement for every role. The longer framework-as-a-product page was moved to
+[`../../archive/topics/microservices/02_framework_as_a_product.md`](../../archive/topics/microservices/02_framework_as_a_product.md).
 
 Read in this order:
 
 1. `README.md` (this file) — strategy + cram sheet
 2. `01_microservices_primer.md` — architecture + testing knowledge
-3. `02_framework_as_a_product.md` — framework/platform specialization
-4. `03_reframe_your_projects.md` — turn existing projects into platform evidence
-5. `04_mock_qa.md` — rehearse out loud
+3. `03_reframe_your_projects.md` — turn existing projects into platform evidence
+4. `04_mock_qa.md` — rehearse out loud
 
 ---
 
@@ -68,8 +68,8 @@ you understand the internals. Depth beats a false claim.
 | Microservice architecture | Weak | Conversational, confident | `01_microservices_primer.md` |
 | Microservice *testing* strategy | Weak | Can draw the pyramid, name the tools | `01_microservices_primer.md` |
 | Contract testing (Pact) | Unknown | Explain consumer-driven contracts | `01` + `04` |
-| Platform/framework-as-product | Implicit | Explicit, owns it | `02_framework_as_a_product.md` |
-| Packaging/versioning (Maven BOM, semver) | Basic | Can design the release model | `02` |
+| Platform/framework-as-product | Implicit | Explicit, owns it | Archived `02` (see above) |
+| Packaging/versioning (Maven BOM, semver) | Basic | Can design the release model | Archived `02` (see above) |
 | Containers / CI / ephemeral envs | Basic | Can explain Testcontainers + ephemeral env | `01`, `04` |
 | Java/Spring dev depth | Medium | Can pass a "dev knowledge" screening | `04` |
 
