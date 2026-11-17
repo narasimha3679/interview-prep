@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": "python .cursor/hooks/practice_autosave.py",
+        "timeout": 30,
+        "loop_limit": 1
+      }
+    ]
+  }
+}

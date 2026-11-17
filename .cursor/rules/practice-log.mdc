@@ -1,0 +1,17 @@
+---
+description: Keep the practice log current in the same turn an answer is graded
+alwaysApply: true
+---
+
+# Practice log protocol
+
+The learner's progress lives in `practice/`. Chat memory does not count.
+
+- Read `practice/<topic>/SKILLS.md` before teaching; it lists the weak spots.
+- Grade an answer → write it to `practice/<topic>/sessions/YYYY-MM-DD.md` **in that same reply**.
+- Level or evidence changed → update `practice/<topic>/SKILLS.md` in place.
+- End the reply with `Logged: <path>`.
+- Never end a turn with graded but unwritten work. Do not wait to be asked.
+
+Session files are append-only: record the answer as given, then the correction.
+`solid` requires a correct answer **and** working code.
