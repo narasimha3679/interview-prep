@@ -1,6 +1,7 @@
 # SQL for SDETs
 
-Query skills for API/database validation and data-heavy test scenarios.
+Query skills for API/database validation and data-heavy test scenarios. The interview query answers
+use **Microsoft SQL Server (T-SQL)** as their base dialect.
 
 ## 60-second cram
 
@@ -11,7 +12,7 @@ Query skills for API/database validation and data-heavy test scenarios.
 5. Window functions handle top-N-per-group, running totals, and deduplication.
 6. Keyset pagination is stable under inserts; offset pagination can skip/duplicate.
 7. Composite index leftmost prefix matters.
-8. Use `EXPLAIN ANALYZE` on critical queries.
+8. Inspect the actual execution plan for critical SQL Server queries.
 9. Know isolation levels and lost-update/deadlock behavior.
 10. Parameterize queries; never concatenate input.
 
@@ -19,6 +20,7 @@ Query skills for API/database validation and data-heavy test scenarios.
 
 | File | Topic |
 |---|---|
+| [`03_qa.md`](03_qa.md) | 20 common, easy SQL Server “find this” interview queries with answers |
 | [`sql-mini-round.md`](sql-mini-round.md) | JOINs, HAVING, duplicates, nth highest, ACID |
 | [`sql-advanced.md`](sql-advanced.md) | window functions, CTEs, indexes, query plans, isolation |
 

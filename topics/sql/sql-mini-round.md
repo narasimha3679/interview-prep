@@ -35,14 +35,14 @@ HAVING COUNT(*) > 1;
 
 ## Nth highest salary
 ```sql
--- MySQL / Postgres (2nd highest)
-SELECT DISTINCT salary FROM emp ORDER BY salary DESC LIMIT 1 OFFSET 1;
-
--- Oracle (older)
-SELECT MIN(salary) FROM (SELECT DISTINCT salary FROM emp ORDER BY salary DESC)
-WHERE ROWNUM <= 2;
+-- SQL Server (2nd highest distinct salary)
+SELECT Salary
+FROM (SELECT DISTINCT Salary FROM dbo.Employees) AS Salaries
+ORDER BY Salary DESC
+OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY;
 ```
-Dialects: `LIMIT/OFFSET` (MySQL/Postgres), `ROWNUM`/`FETCH FIRST` (Oracle), `TOP` (SQL Server).
+For the Nth salary, use `OFFSET N - 1`. MySQL/Postgres use `LIMIT 1 OFFSET N - 1`; modern Oracle
+also supports `OFFSET ... FETCH`.
 
 ## DELETE vs TRUNCATE vs DROP
 | | DELETE | TRUNCATE | DROP |
@@ -76,7 +76,7 @@ Data type/size, **constraints** (PK, FK, unique, not null), **referential integr
 
 ## Memorize
 1. **"`WHERE` filters rows before grouping; `HAVING` after. `GROUP BY` + `HAVING COUNT(*) > 1` finds duplicates."**
-2. **"INNER = matches only, LEFT = all left + matches. Nth highest: `LIMIT 1 OFFSET N-1`."**
+2. **"INNER = matches only, LEFT = all left + matches. SQL Server nth highest: `OFFSET N-1 ROWS FETCH NEXT 1 ROWS ONLY`."**
 3. **"DELETE = transactional with WHERE; TRUNCATE/DROP never on a shared test env. PK unique+not null; FK = referential integrity."**
 
 ## Likely follow-ups

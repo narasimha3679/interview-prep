@@ -24,6 +24,7 @@ Company-specific notes are optional lenses, never the organizing principle.
 ├── CATALOG.md             # every topic with level/time/prereqs
 ├── PROJECTS.md            # runnable projects and commands
 ├── GLOSSARY.md            # cross-topic vocabulary
+├── practice/              # session log: what was asked, answered, and still weak
 ├── topics/                # study packs, grouped by subject
 └── projects/              # runnable automation frameworks
 ```
@@ -195,6 +196,7 @@ See [`PROJECTS.md`](PROJECTS.md) for run commands and what each project proves.
 | [`CATALOG.md`](CATALOG.md) | Topic catalogue with level/time/prereqs |
 | [`PROJECTS.md`](PROJECTS.md) | Runnable projects and commands |
 | [`GLOSSARY.md`](GLOSSARY.md) | Cross-topic vocabulary |
+| [`practice/`](practice/) | Session log, Java skill matrix, weak-spot drill plan |
 | [`AGENTS.md`](AGENTS.md) | Repository conventions for future changes |
 
 ---
