@@ -37,6 +37,23 @@ practice/
     └── drills/          # code written during practice, reviewed line by line
 ```
 
+## Durability
+
+Progress must not depend on asking for it.
+
+| Layer | Guarantee |
+|---|---|
+| Same-reply writes | An answer is written to the session file in the reply that grades it |
+| `SKILLS.md` update | Levels change in the same reply, in place |
+| `.cursor/hooks/practice_autosave.py` | On agent stop, commits anything under `practice/` |
+| `Logged:` line | Every teaching reply names the file it wrote |
+
+The hook also warns when `SKILLS.md` is older than the newest session log — that means the matrix
+was skipped.
+
+Recovery if something is missing: `git log --oneline -- practice/` shows every auto-save, and each
+one can be diffed or restored with `git show <sha> -- practice/`.
+
 ## Rules
 
 - Record the answer **as given**, then the correction. Do not rewrite history.
