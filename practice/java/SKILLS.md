@@ -2,7 +2,8 @@
 
 Live view of where I actually am. Updated after every session.
 
-**Last updated:** 2026-11-16 · **Sessions:** 1 · **Next up:** equality + `HashMap` contract
+**Last updated:** 2026-11-16 · **Sessions:** 1 · **Next up:** List + Map basics quiz
+(lesson + runnable demo: `practice/java/drills/CollectionsBasics.java`)
 
 ## Legend
 
