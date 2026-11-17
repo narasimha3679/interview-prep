@@ -9,7 +9,7 @@ README.md      # entry point
 topics/        # study packs
 projects/      # runnable automation frameworks
 practice/      # learner state: session logs + skill matrices
-.cursor/       # rules and hooks
+.opencode/     # OpenCode plugin: practice auto-save
 ```
 
 ## Practice log protocol
@@ -22,8 +22,8 @@ The learner tracks progress in `practice/`. It is the deliverable, not a note.
 3. **Update `SKILLS.md` in place** whenever a level, piece of evidence, or next action changes.
 4. **End every reply that taught or graded something with** `Logged: <path>`.
 5. **Never finish a turn with graded but unwritten work.** Chat is not storage.
-6. Progress is auto-committed by `.cursor/hooks/practice_autosave.py` on stop. That is a backstop,
-   not a substitute for 2–5.
+6. Progress is auto-committed by `.opencode/plugins/practice-autosave/index.ts` when a session goes
+   idle. That is a backstop, not a substitute for 2–5.
 
 A level moves only on evidence: `solid` requires a correct answer **and** working code.
 
