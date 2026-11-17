@@ -45,7 +45,7 @@ Progress must not depend on asking for it.
 |---|---|
 | Same-reply writes | An answer is written to the session file in the reply that grades it |
 | `SKILLS.md` update | Levels change in the same reply, in place |
-| `.cursor/hooks/practice_autosave.py` | On agent stop, commits anything under `practice/` |
+| `.opencode/plugins/practice-autosave/index.ts` | When the session goes idle, commits anything under `practice/` |
 | `Logged:` line | Every teaching reply names the file it wrote |
 
 The hook also warns when `SKILLS.md` is older than the newest session log — that means the matrix
