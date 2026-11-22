@@ -2,7 +2,10 @@
 
 Live view of where I actually am. Updated after every session.
 
-**Last updated:** 2026-11-17 · **Sessions:** 2 · **Next up:** `equals`/`hashCode` + the `Person` drill
+**Target:** Java coding round for SDET · depth capped at round level, no language internals
+**Deadline:** Citi round 3 — Tue 2026-11-24
+
+**Last updated:** 2026-11-21 · **Sessions:** 3 · **Next up:** `RunSummary` coding-round task (enums capped at round level)
 
 ## Legend
 
@@ -58,6 +61,18 @@ Live view of where I actually am. Updated after every session.
 | Collectors, `groupingBy`, `partitioningBy` | not assessed | — | — |
 | Functional interfaces, method references | not assessed | — | `Integer::sum` seen in `merge` |
 
+## Enums
+
+| Skill | Level | Evidence | Next action |
+|---|---|---|---|
+| Enum is a class; constants are single instances | shaky | S3 Q2: `==` compares references, `new String` makes a new object | Not needed for the round — stop drilling |
+| Fields, constructor, methods on enum | not assessed | — | Out of scope (round level) |
+| `name()` vs `toString()` vs `valueOf` | unknown | S3 Q1 blank | Only `valueOf` + `try/catch` — in task R1 |
+| `ordinal()` is not a stable id | unknown | S3 Q3 blank | Out of scope (round level) |
+| `switch` over enum, exhaustiveness | not assessed | — | Covered in the round task |
+| `EnumSet` / `EnumMap` | not assessed | — | Out of scope until a task needs it |
+| Enum as map key / persisted status | not assessed | — | Out of scope (round level) |
+
 ## Not yet assessed
 
 Generics and wildcards · concurrency and `ThreadLocal` · JVM memory and GC · modern Java (records,
@@ -66,6 +81,7 @@ two pointers, maps).
 
 ## Current focus order
 
+0. **Enums** — user-requested start of core Java; opened in S3, test pending.
 1. **Map + Set semantics in code** — one working file each, not just explanations.
 2. **Equality and hashing** — blocks maps, sets, assertions, and half the coding round.
 3. **List choice and complexity** — blocks the "why not `LinkedList`" question.
@@ -83,3 +99,5 @@ two pointers, maps).
 - Mutable field used in `hashCode`, then mutated after insertion.
 - `LinkedList.get(i)` is O(n), not O(1).
 - Reusing a consumed `Stream`.
+- `valueOf("failed")` when `toString()` was overridden — it parses `name()`, case-sensitive.
+- Persisting `ordinal()` instead of `name()`.

@@ -30,11 +30,12 @@ enough for a coding interview.
 ```text
 practice/
 ├── README.md            # this page
-└── java/
+├── _template/           # SKILLS.md and session.md shapes
+└── <topic>/             # java/, restassured/, sql/, ...
     ├── SKILLS.md        # live matrix: level, evidence, next action
     ├── sessions/        # one file per session, append-only
     │   └── YYYY-MM-DD.md
-    └── drills/          # code written during practice, reviewed line by line
+    └── drills/          # optional: code written during practice, reviewed line by line
 ```
 
 ## Durability

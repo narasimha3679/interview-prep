@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class SyntaxDemoTest {
+public class StructureDrillTest {
 
     private RequestSpecification spec;
 
@@ -39,7 +39,7 @@ public class SyntaxDemoTest {
     @Test
     public void createPost() {
         Map<String, Object> body = Map.of("title", "nara", "body", "drill", "userId", 1);
-
+System.out.println(body);
         given()
                 .spec(spec)
                 .body(body)
