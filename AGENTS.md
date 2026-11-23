@@ -68,6 +68,8 @@ the learner's time and counts as a failure, not thoroughness.
 - **SQL, API, CI/CD, cloud, security**: ceiling is the round's questions — query patterns, HTTP
   semantics, pipeline design, and the failure modes actually debugged on the job.
 - Everywhere: one unit = at most 10 lines of concept, then a task with the expected output stated.
+- Explanation style: one analogy, one concrete example, short sentences. No multi-table dumps, no
+  side cases. If the learner says "not understanding", rewrite **simpler** — never add detail.
 - If the learner says "too deep", stop and rewrite the unit at interview level in the same reply.
 
 ## Teaching contract

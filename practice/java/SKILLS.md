@@ -2,10 +2,11 @@
 
 Live view of where I actually am. Updated after every session.
 
-**Target:** Java coding round for SDET · depth capped at round level, no language internals
+**Target:** Java coding round for SDET **and** the Java used inside an enterprise framework (streams,
+generics, exceptions, `equals`/`hashCode`) · no language internals
 **Deadline:** Citi round 3 — Tue 2026-11-24
 
-**Last updated:** 2026-11-21 · **Sessions:** 3 · **Next up:** `RunSummary` coding-round task (enums capped at round level)
+**Last updated:** 2026-11-23 · **Sessions:** 5 · **Next up:** Citi round 3 (Tue 2026-11-24); no new Java before it
 
 ## Legend
 
@@ -23,25 +24,28 @@ Live view of where I actually am. Updated after every session.
 |---|---|---|---|
 | OOP pillars, abstract vs interface | not assessed | — | 5 questions after collections |
 | `==` vs `.equals()`, string pool | shaky | S1 Q1: said `a == b` is false; literals are pooled | Re-ask with runtime-built strings |
-| String immutability, `StringBuilder` | solid | S1 Q2: new object per concat; knew to append | Compare with `StringBuffer` cost |
-| `split`, regex basics | shaky | S2: guessed literal `split(" ")`; fixed to `\\s+` | Re-test `split(".")` and trailing empties |
-| `println` / `toString` output | shaky | S2: saw `AbstractMap.toString`; no own code yet | Add `toString` to `Person` |
+| String immutability, `StringBuilder` | solid | S1 Q2 + S3 palindrome + S5 reverse without `StringBuilder` | — |
+| `split`, regex basics | shaky | S2: literal `split(" ")`; S3b: `split("@",1)`; S4: `split(" ")` on single-spaced input | Re-test on `"  a   b "` |
 | `final`, `static`, inner classes | not assessed | — | — |
 | Overloading vs overriding | not assessed | — | — |
+| Two pointers / `charAt` scan | solid | S3: palindrome with `start`/`end`, compiles, correct on 7 inputs | — |
+| `char[]` + `Arrays` helpers | solid | S3: anagram with `toCharArray`/`sort`/`equals`, compiles, output correct | — |
+| `int[]` traversal, in-place swap | solid | S4: `while (start < end)` + temp swap, `[5,4,3,2,1]` correct | — |
 
 ## Collections
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| List basics: `add`, `get(i)`, loop | shaky | S2: read `CollectionsBasics`, no own code | Write a List loop unassisted |
+| List basics: `add`, `get(i)`, loop | solid | S3–S4: own loops over lists in `EmailDomains`, `WordCount`, `TopWord` | — |
 | List choice: `ArrayList` vs `LinkedList` | unknown | S1 Q3 blank | Benchmark drill |
-| Map semantics: `put`, `get`, `getOrDefault`, `merge` | shaky | S2 Q1: thought duplicate key fails; Q3 loop correct | Explain `put` return value |
-| `HashMap` internals, `equals`/`hashCode` | unknown | S1 Q4 blank | `Person` drill: break it, then fix it |
-| Set implementations and iteration order | shaky | S2: did not know any of the three; saw the demo | Pick the right Set in 3 scenarios |
-| Sorted output: `TreeMap`, `entrySet` | unknown | S2: taught, not attempted | Finish Q3 with `Integer` + `TreeMap` |
+| Map semantics: `put`, `get`, `getOrDefault`, `merge` | solid | S3b: `merge` used in `EmailDomains`; S3: `Map.equals` in anagram, outputs correct | — |
+| `HashMap` internals, `equals`/`hashCode` | unknown | S1 Q4 blank; S5 patch: bucket behaviour shown (set size 2 with equals only) | Q1 + `Person` drill |
+| Set implementations and iteration order | solid | S5: `LinkedHashSet` dedupe preserving first-seen order, `[3,1,2,4]` correct | — |
+| Sorted output: `TreeMap`, `entrySet` | solid | S3–S5: `entrySet` → `ArrayList` → comparator, five drills | — |
 | `LinkedHashMap`, iteration order | not assessed | — | — |
 | Iteration + `ConcurrentModificationException` | not assessed | — | — |
-| `Comparable` vs `Comparator` | not assessed | — | — |
+| `Comparable` vs `Comparator` | solid | S3b: sort in `EmailDomains`; S4: `WordCount` sort with tie-break, both inputs correct | — |
+| `println` / `toString` output | shaky | S2: saw `AbstractMap.toString`; S4: printed `HashMap` and assumed it was sorted | Add `toString` to `Person` |
 
 ## Exceptions and resources
 
@@ -56,37 +60,39 @@ Live view of where I actually am. Updated after every session.
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| `map` vs `flatMap` | unknown | S1 Q5 blank | Explain + drill |
-| Stream is lazy, single-use | unknown | S1 Q5 blank | Reproduce `IllegalStateException` |
+| `map` vs `flatMap` | unknown | S1 Q5 blank; S5 patch: `filter`/`map`/`sorted`/`toList` shown | `Squares` task + Q2 |
+| Stream is lazy, single-use | unknown | S1 Q5 blank; S5 patch: laziness stated | Q2 |
 | Collectors, `groupingBy`, `partitioningBy` | not assessed | — | — |
-| Functional interfaces, method references | not assessed | — | `Integer::sum` seen in `merge` |
+| Functional interfaces, method references | shaky | S5: `String::length` and merge-`Integer::sum` right; `Math.max` written as `Integer::max` | Re-test `Math::max` vs `Integer::max` |
 
 ## Enums
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| Enum is a class; constants are single instances | shaky | S3 Q2: `==` compares references, `new String` makes a new object | Not needed for the round — stop drilling |
-| Fields, constructor, methods on enum | not assessed | — | Out of scope (round level) |
-| `name()` vs `toString()` vs `valueOf` | unknown | S3 Q1 blank | Only `valueOf` + `try/catch` — in task R1 |
-| `ordinal()` is not a stable id | unknown | S3 Q3 blank | Out of scope (round level) |
-| `switch` over enum, exhaustiveness | not assessed | — | Covered in the round task |
-| `EnumSet` / `EnumMap` | not assessed | — | Out of scope until a task needs it |
-| Enum as map key / persisted status | not assessed | — | Out of scope (round level) |
+| Enum is a class; constants are single instances | shaky | S3 Q2: `==` compares references, `new String` makes a new object | Parked — not in a coding round |
+| Fields, constructor, methods on enum | not assessed | — | Parked |
+| `name()` vs `toString()` vs `valueOf` | unknown | S3 Q1 blank | Parked; only `valueOf` + `try/catch` matters |
+| `ordinal()` is not a stable id | unknown | S3 Q3 blank | Parked |
+| `switch` over enum, exhaustiveness | not assessed | — | Parked |
+| `EnumSet` / `EnumMap` | not assessed | — | Parked |
+| Enum as map key / persisted status | not assessed | — | Parked |
 
 ## Not yet assessed
 
 Generics and wildcards · concurrency and `ThreadLocal` · JVM memory and GC · modern Java (records,
-sealed, pattern matching, virtual threads) · design patterns · coding-round drills (arrays, strings,
-two pointers, maps).
+sealed, pattern matching, virtual threads) · design patterns · OOP theory (abstract vs interface,
+overloading vs overriding).
+
+**Done since this list was written:** arrays, strings, two pointers, maps, comparator (S3–S5).
 
 ## Current focus order
 
-0. **Enums** — user-requested start of core Java; opened in S3, test pending.
-1. **Map + Set semantics in code** — one working file each, not just explanations.
-2. **Equality and hashing** — blocks maps, sets, assertions, and half the coding round.
-3. **List choice and complexity** — blocks the "why not `LinkedList`" question.
-4. Streams → generics → concurrency → JVM → modern Java.
-5. Coding drills once 1–3 are `solid`.
+1. **Java used in the framework** — streams/lambdas, `equals`/`hashCode`, generics. These are what a
+   framework round asks about, and all three are still `unknown`.
+2. **Selenium stages** — CI (done), layers/config, waits, parallel, data seeding.
+3. **Coding round** — already `solid` on the six patterns; keep warm with one drill a week.
+4. **Theory** — abstract vs interface, overloading vs overriding, `ArrayList` vs `LinkedList`.
+5. Streams → generics → concurrency → JVM → modern Java (only if the role asks).
 
 ## Recurring traps to re-test every session
 
@@ -101,3 +107,7 @@ two pointers, maps).
 - Reusing a consumed `Stream`.
 - `valueOf("failed")` when `toString()` was overridden — it parses `name()`, case-sensitive.
 - Persisting `ordinal()` instead of `name()`.
+- Methods without `()`: `getKey`, `charAt[i]`, `entrySet`, `equalsTo`.
+- `List<Map<...>>` when you meant `List<Map.Entry<...>>`.
+- `0` used as "not found" sentinel when `0` is a valid value.
+- Printing a `Map` and assuming it is sorted — hash order is arbitrary.
