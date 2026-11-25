@@ -3,9 +3,10 @@
 Live view of where I actually am. Updated after every session.
 
 **Target:** Playwright + TypeScript SDET round — working framework code, waits/locators, debugging
-flakiness. Two-day sprint started 2026-11-24.
+flakiness. Practice target: **Cashual** (`projects/cashual-e2e/`, local frontend + real Supabase).
+Two-day sprint started 2026-11-24.
 **Baseline:** new to Playwright. Strong Selenium/Java background (see `practice/selenium/SKILLS.md`).
-**Last updated:** 2026-11-24 · **Sessions:** 1 · **Next up:** auto-waiting and web-first assertions
+**Last updated:** 2026-11-24 · **Sessions:** 3 · **Next up:** `cashual-e2e` step 2 — config + auth setup
 
 ## Legend
 
@@ -37,19 +38,19 @@ row below, not evidence of my own skill until I can rebuild a piece of it unaide
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| Locator is a lazy query, not an element | not assessed | — | Explain when the DOM is first touched |
-| Auto-waiting and actionability checks | not assessed | — | Predict a click on a late-rendering button |
-| Web-first assertions vs `isVisible()` | not assessed | — | Name the race in the manual form |
-| Isolation: browser → context → page | not assessed | — | Explain why parallel login tests don't collide |
-| Locator strategy: role > label > testId > CSS | not assessed | — | Rewrite one brittle CSS selector |
+| Locator is a lazy query, not an element | shaky | S2 verbal 3/4 — right mechanism, called it "lazy loading"; code pending | Re-ask after `drill-01` |
+| Auto-waiting and actionability checks | shaky | S2 verbal 3/4 — missed stable / receives-events / strict mode | Name the four checks, then predict two outcomes |
+| Web-first assertions vs `isVisible()` | shaky | S2 verbal 2/4 — saw redundancy, missed that `isVisible()` does not wait | Unit 2: snapshot vs poll |
+| Isolation: browser → context → page | shaky | S2 verbal 3/4 — context + page per test, torn down; code pending | Re-ask after `drill-01` |
+| Locator strategy: role > label > testId > CSS | shaky | S3 hit a strict-mode collision: `getByLabel('Password')` matched the field and the "Show password" toggle | Explain why `exact` fixes it, then write a locator for a table row |
 
 ## Test runner
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
 | `test` / `describe` / hooks and their order | not assessed | — | Trace execution order for one spec |
-| Built-in vs custom typed fixtures | not assessed | — | Write a fixture from scratch |
-| Config: projects, `baseURL`, retries, workers, timeouts | not assessed | All keys present in `playwright.config.ts`; env values fall back silently | Explain what each key changes, and why silent fallback is a defect |
+| Built-in vs custom typed fixtures | shaky | Day 2 wrote `src/fixtures/test.ts` with `dashboard`; spec imports `{ test, expect }` from it | Add a second fixture and a teardown fixture unaided |
+| Config: projects, `baseURL`, retries, workers, timeouts | shaky | S3 wrote it against a live target; review found a rogue `zod` import shadowing `process`, and no `tsconfig.json` | Fix both, then explain each block without notes |
 | Tagging with `@smoke` and `--grep` selection | not assessed | — | Add and filter a tag |
 | Parallelism and sharding | not assessed | — | Explain workers vs shards |
 
@@ -57,7 +58,7 @@ row below, not evidence of my own skill until I can rebuild a piece of it unaide
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| Trace viewer, screenshot, video on failure | not assessed | — | Read one trace and name the failing step |
+| Trace viewer, screenshot, video on failure | shaky | D2 generated and decoded a real trace (actions, DOM snapshots, network, screencast); learner has not driven the viewer yet | Open `trace.zip`, name the failing action and the DOM state |
 | `--ui`, `--debug`, `PWDEBUG` | not assessed | — | Drive one run through the UI mode |
 | Diagnosing a flaky test from evidence | not assessed | — | Given a flaky run, name the root cause |
 | Retries: what they hide and what they prove | not assessed | — | State the interview answer |
@@ -66,11 +67,12 @@ row below, not evidence of my own skill until I can rebuild a piece of it unaide
 
 | Skill | Level | Evidence | Next action |
 |---|---|---|---|
-| Page objects: locators + actions, no business asserts | not assessed | — | Refactor one page cleanly |
-| `storageState` auth setup + project dependency | not assessed | Audit: absent — every spec logs in through the UI | Add a `setup` project + `storageState` |
-| API setup via `request` fixture | not assessed | Audit: absent; demo site is UI-only, so this needs a decision | Seed state without clicking |
+| Page objects: locators + actions, no business asserts | shaky | Day 2 wrote `DashboardPage`; first draft had a duplicate brace and no member declarations | Add a second page object unaided |
+| `storageState` auth setup + project dependency | shaky | Day 2 proven: `chromium` reaches `/dashboard` without logging in; path needed two corrections | Explain role → state → project dependency out loud |
+| API setup via `request` fixture | not assessed | Reference: worker-scoped token + per-test client in `src/api/`; demo UI has no API, so no UI seeding | Seed state without clicking |
 | Network mocking with `route` / `fulfill` | not assessed | — | Stub one failing response |
-| CI: install browsers, artifacts, sharding | not assessed | Workflow runs 3 browsers in one job, uploads report; no `tsc`, no sharding, no JUnit | Explain the workflow, then fix the three gaps |
+| CI: install browsers, artifacts, sharding | not assessed | Reference: quality gate → 3 shards → merged blob report, traces on failure | Explain the workflow steps out loud |
+| Environment isolation: local vs production data | shaky | S3 targets live; configured account is an employee, so company writes are not reachable yet | Decide QA company owner before any CRUD test |
 
 ## TypeScript for Playwright
 
@@ -93,6 +95,8 @@ row below, not evidence of my own skill until I can rebuild a piece of it unaide
 
 - Writing `waitForTimeout` because Selenium needed a sleep.
 - `expect(await locator.isVisible()).toBe(true)` instead of the web-first assertion.
+- Calling a locator "lazy loaded" — it is a lazy *query*, and it caches nothing.
+- Describing auto-wait as "waits for the page to load" instead of re-resolving + actionability.
 - Treating a `Locator` like a `WebElement` (finding it once, reusing a stale node).
 - Business assertions inside page objects.
 - `page` shared across tests or `describe`-level mutable state.
